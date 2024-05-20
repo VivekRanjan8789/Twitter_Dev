@@ -20,6 +20,15 @@ class TweetRepository {
         }
     }
 
+    async getWithComments(id){
+        try {
+            const tweet = Tweet.findById(id).populate({path: 'comments'});
+            return tweet;            
+        } catch (error) {
+            console.log(error);
+        }
+    }
+
     async update(tweetId, data) {
         try {
             const tweet = Tweet.findByIdAndUpdate(tweetId, data, {new: true});

@@ -18,11 +18,7 @@ app.listen(PORT, async() => {
         // });
         // const tweets = await Tweet.find({userEmail: 'a@b.com'});
         const tweetRepo = new TweetRepository();
-        const tweet = await tweetRepo.create({content:'other Tweet with common Schema'});
-        console.log(tweet);
-        const comment = await Comment.create({content: 'other new comment'});
-        tweet.comments.push(comment);
-        await tweet.save();
+        const tweet = await tweetRepo.getWithComments('664b02ed6ff888237adc96b2');
         console.log(tweet);
 })
 
