@@ -12,7 +12,7 @@ app.listen(PORT, async() => {
 
         let service = new TweetService();
         // const tweet  = await service.create({
-        //         content: "Done with #refactor?? #Excited"
+        //         content: "my other #CoDE #works or #NOT, #FUN"
         // })
         // console.log(tweet);
         

@@ -7,8 +7,9 @@ class TweetService {
 
     async create(data) {
         const content = data.content; // content of data is taken
-        let tags = content.match(/#[a-zA-Z0-9_]+/g); // this regex extract hashtags 
-        tags = tags.map((tag) => tag.substring(1));    // removed the '#' from all hashtags in from starting
+        let tags = content.match(/#[a-zA-Z0-9_]+/g) // this regex extract hashtags 
+                    .map((tag) => tag.substring(1))    // removed the '#' from all hashtags in from starting
+                    .map(tag => tag.toLowerCase());    // in db-> we will store our hashtags only in lowerCase
         const tweet = await this.TweetRepository.create(data);  // tweet created but i have to create hashtag also if not present in the db
 
         let alreadyPresentTags = await this.HashtagRepository.findByName(tags) // will give whole object in which tags are already present
