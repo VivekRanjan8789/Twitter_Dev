@@ -2,7 +2,7 @@ import mongoose from 'mongoose';
 
 const likeSchema = new mongoose.Schema({
     onModel: {
-        typr: String,
+        type: String,
         required: true,
         enum: ['Tweet', 'Comment']
     },
