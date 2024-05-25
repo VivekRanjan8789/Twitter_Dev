@@ -8,6 +8,16 @@ const commentScema = new mongoose.Schema({
     userEmail: {
         type: String
     },
+    onModel: {
+        type: String,
+        required: true,
+        enum: ['Tweet', 'Comment']
+    },
+    commentable: {     //id of comment on which we are going to comment
+        type: mongoose.Schema.Types.ObjectId,
+        required: true,
+        refPath: 'onModel'
+    }
 }, {timestamps: true});
 
 const Comment = mongoose.model('Comment', commentScema);
