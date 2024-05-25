@@ -7,7 +7,7 @@ class LikeService {
     this.TweetRepository = new TweetRepository();
   }
 
-  async toggleLike(modelId, modelType, userId) {
+  async toggleLike(modelId, modelType, userId) { //modelId & modelType is going to send by params
     if (modelType === 'Tweet') {
       // Ensure that populate is called on a valid Mongoose query
       var likeable = await this.TweetRepository.find(modelId);
