@@ -1,5 +1,7 @@
 import mongoose from "mongoose";
 import bcrypt from 'bcrypt';
+import jwt from 'jsonwebtoken'
+
 const userSchema = mongoose.Schema({
     email: {
         type: String,
@@ -16,6 +18,7 @@ const userSchema = mongoose.Schema({
     }
 }, {timestamps: true});
 
+// pre hooks that will encrypt password (using bcrypt) before save it to db 
 userSchema.pre('save', function(next){
      const user = this;
      const SALT =  bcrypt.genSaltSync(10);
@@ -23,6 +26,18 @@ userSchema.pre('save', function(next){
      user.password = encryptedPassword;
      next();
 })
+
+// match the password created by bcrypt and incoming password by user
+userSchema.methods.comparePassword = function compare(password) {
+    return bcrypt.compareSync(password, this.password);
+}
+
+// generate a jwt-webtoken( a unique token created by 'jsonwebtoken') when logged in this website
+userSchema.methods.genJWT = function generate(){
+     return jwt.sign({id: this._id, email: this.email}, 'twitter_secret', {
+        expiresIn: '1h'
+     })
+}
 
 const User = mongoose.model('User', userSchema);
 
