@@ -16,7 +16,10 @@ const tweetScema = new mongoose.Schema({
             type: mongoose.Schema.Types.ObjectId,
             ref: 'Comment'
         }
-    ]
+    ],
+    image: {
+        type: String
+    }
     
 }, {timestamps: true});
 

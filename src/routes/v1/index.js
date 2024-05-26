@@ -7,9 +7,11 @@ import { signup, login } from '../../controllers/auth-controller.js';
 
 import { authenticate } from '../../middleware/authenticate.js';
 
+
+
 const router = express.Router();
 
-router.post('/tweets', authenticate, createTweet);  // before createTweet the user must be authenticate means registered to db
+router.post('/tweets', createTweet);  // before createTweet the user must be authenticate means registered to db
 router.get('/tweets/:id', getTweet);
 
 router.post('/likes/toggle', toggleLike)
